@@ -1,0 +1,18 @@
+# 保密区 — 真实工厂数据，绝不入库
+private/
+
+# 内部工作文档 — 含公司名/策略，绝不进公开提交 repo（本地保留）
+PLAN.md
+CLAUDE.md
+
+# 常规
+.env
+.env.local
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+*.log
+
+# local preview config
+.claude/launch.json

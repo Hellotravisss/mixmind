@@ -1,0 +1,10 @@
+# Strength model + tools + retrieval (CPU, no GPU needed)
+scikit-learn>=1.4
+pandas>=2.0
+ucimlrepo>=0.0.7
+
+# Self-hosted Gemma 4 brain (AMD ROCm GPU).
+# On the AMD notebook these ship preinstalled (ROCm build of torch); pin here for reference.
+transformers>=5.13
+peft>=0.11
+# torch  -> install the ROCm build for your platform: https://pytorch.org/get-started/locally/
