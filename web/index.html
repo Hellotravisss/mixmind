@@ -191,6 +191,14 @@
   .foot{border-top:1px solid var(--line-soft);padding:30px 0 60px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;font-family:var(--mono);font-size:12px;color:var(--ink-faint)}
   .foot b{color:var(--ink-dim);font-weight:600}
 
+  .playbtn{display:inline-flex;align-items:center;gap:9px;background:var(--amber);color:var(--amber-ink);
+    border:0;border-radius:9px;font-weight:700;font-size:14px;padding:12px 20px;cursor:pointer;box-shadow:var(--shadow)}
+  .playbtn:hover{filter:brightness(1.07)}
+  .dcap{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:80;display:flex;align-items:center;gap:14px;
+    max-width:min(92vw,760px);background:color-mix(in srgb,var(--ground) 92%,transparent);border:1px solid var(--line);
+    border-radius:12px;box-shadow:var(--shadow);padding:13px 18px;backdrop-filter:blur(8px)}
+  .dcap span{font-size:15px;font-weight:600;line-height:1.4}
+  .dcap button{flex:0 0 auto;background:none;border:1px solid var(--line);color:var(--ink-dim);border-radius:7px;font-size:12px;padding:6px 10px;cursor:pointer}
   .reveal{opacity:0;transform:translateY(10px);animation:rise .5s cubic-bezier(.2,.7,.3,1) forwards}
   .st1{animation-delay:.03s}.st2{animation-delay:.10s}.st3{animation-delay:.17s}.st4{animation-delay:.24s}.st5{animation-delay:.33s}
   @keyframes rise{to{opacity:1;transform:none}}
@@ -215,6 +223,7 @@
       <h1>Your plant's R&amp;D department, on <i>its own hardware.</i></h1>
       <p class="hsub">MixMind cuts cement &#8212; <b>the cost and the carbon</b> &#8212; while holding strength. A <b>Floor Copilot</b> answers from your own plant notes; a <b>Mix Committee</b> weighs every recipe change against a strength model at R&#178;=0.91. The recipe never leaves the building.</p>
       <div class="hchips"><span class="hchip on">Gemma 4 &#183; AMD-hosted</span><span class="hchip">Strength R&#178;=0.91</span><span class="hchip">100% on-prem</span></div>
+      <div style="margin-top:20px"><button class="playbtn" id="playDemo" type="button"><span aria-hidden="true">&#9654;</span>&nbsp;Watch the 60-second demo</button></div>
     </div>
     <div class="hud"><div class="n" id="heroNum">&#8722;17%</div><div class="l">kg CO&#8322; / m&#179; &#183; vs baseline mix</div></div>
   </section>
@@ -385,11 +394,15 @@
     {id:"KB-12",text:"If early strength is low in winter, check the cure area temperature first - cold spots near the door slow hydration. Rotate racks or extend cure time.",
      kw:"early strength low winter cold cure temperature hydration weak door rack extend"}
   ];
+  // words that appear across many notes (cement, sand...) carry less signal alone
+  var KWFREQ={};KB.forEach(function(n){var seen={};n.kw.split(" ").forEach(function(w){if(!seen[w]){seen[w]=1;KWFREQ[w]=(KWFREQ[w]||0)+1;}});});
   function retrieve(q){
     var toks=q.toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){return w.length>2;});
     var best=null,bs=0;
     KB.forEach(function(n){var set=n.kw.split(" "),sc=0;
-      toks.forEach(function(t){for(var i=0;i<set.length;i++){if(set[i]===t){sc+=2;return;}if(set[i].indexOf(t)===0&&t.length>3){sc+=1;return;}}});
+      toks.forEach(function(t){for(var i=0;i<set.length;i++){
+        if(set[i]===t){sc+=(KWFREQ[t]>=3?1:2);return;}
+        if(set[i].indexOf(t)===0&&t.length>3){sc+=1;return;}}});
       if(sc>bs){bs=sc;best=n;}});
     return {note: bs>=2?best:null, score:bs, toks:toks};
   }
@@ -599,6 +612,74 @@
     matchMedia("(prefers-color-scheme:light)").addEventListener&&matchMedia("(prefers-color-scheme:light)").addEventListener("change",launch);
     if("IntersectionObserver"in window&&!reduce){new IntersectionObserver(function(en){if(en[0].isIntersecting){if(!raf)raf=requestAnimationFrame(frame);}else{cancelAnimationFrame(raf);raf=0;}},{threshold:0.03}).observe(hero);}
     launch();
+  })();
+
+  /* ============ PLAY DEMO: self-driving walkthrough ============ */
+  (function(){
+    var btn=document.getElementById("playDemo");if(!btn)return;
+    var LABEL=btn.innerHTML,timers=[],rafs=[],running=false,cap=null;
+    function caption(t){
+      if(!cap){cap=document.createElement("div");cap.className="dcap";
+        var s=document.createElement("span");cap.appendChild(s);
+        var x=document.createElement("button");x.type="button";x.textContent="Stop";x.onclick=stop;cap.appendChild(x);
+        document.body.appendChild(cap);}
+      cap.firstChild.textContent=t;}
+    function wait(ms,fn){timers.push(setTimeout(function(){if(running)fn();},reduce?Math.min(ms,800):ms));}
+    function esc(e){if(e.key==="Escape")stop();}
+    function stop(){running=false;
+      timers.forEach(clearTimeout);timers=[];rafs.forEach(cancelAnimationFrame);rafs=[];
+      if(cap){cap.remove();cap=null;}
+      btn.innerHTML=LABEL;
+      document.removeEventListener("keydown",esc);
+      window.removeEventListener("wheel",stop);window.removeEventListener("touchmove",stop);}
+    function go(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});}
+    function type(text,done){var q=document.getElementById("q");q.value="";
+      if(reduce){q.value=text;done();return;}
+      var i=0;(function tick(){if(!running)return;q.value=text.slice(0,++i);
+        if(i<text.length)timers.push(setTimeout(tick,26));else done();})();}
+    function slide(el,to,ms,done){
+      if(reduce){el.value=to;el.dispatchEvent(new Event("input"));if(done)done();return;}
+      var from=+el.value,t0=null;
+      function step(ts){if(!running)return;if(!t0)t0=ts;
+        var p=Math.min(1,(ts-t0)/ms);p=p*(2-p);
+        el.value=Math.round(from+(to-from)*p);el.dispatchEvent(new Event("input"));
+        if(p<1)rafs.push(requestAnimationFrame(step));else if(done)done();}
+      rafs.push(requestAnimationFrame(step));}
+    var startedAt=0;
+    btn.onclick=function(){
+      if(running){if(Date.now()-startedAt<600)return;stop();return;}
+      running=true;startedAt=Date.now();btn.innerHTML="&#9632;&nbsp;Stop demo";
+      document.addEventListener("keydown",esc);
+      window.addEventListener("wheel",stop,{passive:true});
+      window.addEventListener("touchmove",stop,{passive:true});
+      go("copilot");caption("01 - Ask the floor. It answers from the plant's own notes, with a citation.");
+      wait(1100,function(){
+      type("Material is stuck in the cement silo - what do I do?",function(){
+      wait(350,function(){answerFor(document.getElementById("q").value);
+      wait(4200,function(){
+      caption("Nothing on file? It refuses. No made-up answers - that's the guardrail.");
+      type("Who is on shift tomorrow morning?",function(){
+      wait(350,function(){answerFor(document.getElementById("q").value);
+      wait(3600,function(){
+      go("committee");caption("02 - Four AI specialists debate every recipe change, grounded in a model trained on 1,030 real lab tests.");
+      renderScn(0);
+      wait(4600,function(){
+      caption("The cheapest, greenest mix on the board...");
+      renderScn(2);
+      wait(1600,function(){
+      caption("...REJECTED. 2-day strength fails the demould spec. Judgment, not a yes-man.");
+      wait(4800,function(){
+      go("optimizer");caption("03 - Drive it yourself. The real R2=0.91 model recomputes live.");
+      oc.value=320;os.value=0;optRender();
+      wait(1400,function(){
+      slide(oc,260,2000,function(){
+      slide(os,60,1600,function(){
+      caption("Less cement, more slag: cheaper, about 50 kg less CO2 per m3 - and still APPROVED.");
+      wait(3800,function(){
+      caption("MixMind - self-hosted on a $4k AMD GPU. Zero bytes leave the plant.");
+      wait(4200,stop);
+      });});});});});});});});});});});});});});
+    };
   })();
 })();
 </script>
