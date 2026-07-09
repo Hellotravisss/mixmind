@@ -83,10 +83,12 @@
   .bizrow .arrow{color:var(--amber);font-family:var(--mono)}
   .bizrow b{font-family:var(--mono);font-weight:600}
 .hint{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;padding:6px 0 30px}
+  @page{size:13.333in 7.5in;margin:0}
   @media print{
-    html,body{background:#fff}
+    html,body{background:var(--ground)}
+    .slide{background-image:none}
     .deck{max-width:none;padding:0}.hint{display:none}
-    .slide{border:0;border-radius:0;margin:0;aspect-ratio:auto;height:100vh;page-break-after:always;break-after:page}
+    .slide{border:0;border-radius:0;margin:0;aspect-ratio:auto;width:13.333in;height:7.5in;page-break-after:always;break-after:page;padding:0.55in 0.62in 0.45in}
   }
 </style></head>
 <body>
@@ -207,6 +209,7 @@ saved adapter → mixmind-gemma4-lora (287 MB)</div>
           <div class="li"><span class="m">diagnosis</span><span class="fix">answers now <b>lead with the likely culprit</b> instead of paraphrasing the note</span></div>
           <div class="li"><span class="m">−15% length</span><span class="fix">tighter, plant-voice answers</span></div>
           <div class="li"><span class="m">judge 2/3</span><span class="fix">independent <b>Fireworks LLM-judge</b> (Kimi K2, blind A/B) preferred the fine-tuned answer on 2 of 3 held-out prompts, tie on the third</span></div>
+          <div class="li"><span class="m">judged</span><span class="fix"><b>Fireworks LLM-judge</b> (blind A/B, independent model family): preferred the fine-tuned answer <b>2 of 3</b> held-out prompts</span></div>
           <div class="li"><span class="m">honest</span><span class="fix">citations were already 100% with prompting — fine-tuning bakes the <b>behavior into the weights</b>, and each plant retrains on its own floor data</span></div>
         </div>
       </div>
