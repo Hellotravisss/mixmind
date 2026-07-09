@@ -3,62 +3,73 @@
 <title>MixMind — deck</title>
 <style>
   :root{
-    --ground:#14161B;--panel:#1B1E25;--panel2:#22262F;--line:#2E333D;
-    --ink:#EDEAE3;--dim:#9C988D;--faint:#6E6C65;
-    --amber:#E9A13C;--good:#63AC80;--bad:#CE5B47;--warn:#D8A23F;--steel:#8098AB;
+    --ground:#14161B;--panel:#1B1E25;--panel2:#22262F;--line:#2E333B;
+    --ink:#ECE8DF;--dim:#A7A296;--faint:#7E7A70;
+    --amber:#E9A13C;--good:#63AC80;--bad:#D2604B;--warn:#D8A23F;--steel:#8098AB;
+    --cement:#E9A13C;--slag:#6E90B4;--sand:#CBA46B;--chips:#8A7355;--water:#4E7E96;
     --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{background:#0E0F13;color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
   .deck{max-width:1120px;margin:0 auto;padding:28px 20px}
   .slide{background:var(--ground);border:1px solid var(--line);border-radius:6px;
-    aspect-ratio:16/9;padding:52px 60px;margin-bottom:26px;position:relative;overflow:hidden;
+    aspect-ratio:16/9;padding:48px 58px 40px;margin-bottom:26px;position:relative;overflow:hidden;
     display:flex;flex-direction:column;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");background-blend-mode:soft-light}
-  .kick{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:20px}
-  .num{position:absolute;top:28px;right:36px;font-family:var(--mono);font-size:12px;color:var(--faint)}
-  h1{font-size:60px;line-height:1.02;font-weight:800;letter-spacing:-.03em;text-wrap:balance}
-  h1 em{font-style:normal;color:var(--amber)}
-  h2{font-size:40px;line-height:1.05;font-weight:800;letter-spacing:-.025em;text-wrap:balance;margin-bottom:26px}
-  .big{font-size:30px;line-height:1.25;font-weight:600;letter-spacing:-.02em;color:var(--ink);max-width:22ch}
-  .sub{font-size:21px;color:var(--dim);margin-top:22px;max-width:52ch;line-height:1.45}
+  .kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:18px}
+  .num{position:absolute;top:26px;right:34px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+  h1{font-size:58px;line-height:1.02;font-weight:800;letter-spacing:-.03em;text-wrap:balance}
+  h1 em,h2 em{font-style:normal;color:var(--amber)}
+  h2{font-size:37px;line-height:1.06;font-weight:800;letter-spacing:-.025em;text-wrap:balance;margin-bottom:22px}
+  .big{font-size:27px;line-height:1.3;font-weight:600;letter-spacing:-.015em;max-width:30ch}
+  .sub{font-size:19px;color:var(--dim);margin-top:18px;max-width:58ch;line-height:1.5}
+  .sub b{color:var(--ink)}
   .spacer{flex:1}
-  .foot{font-family:var(--mono);font-size:13px;color:var(--faint);display:flex;gap:20px;flex-wrap:wrap}
-  .foot b{color:var(--dim);font-weight:600}
-  .amber{color:var(--amber)}
+  .foot{font-family:var(--mono);font-size:12px;color:var(--faint);display:flex;gap:18px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:14px;margin-top:18px}
+  .foot b{color:var(--dim);font-weight:600}.foot .amber{color:var(--amber)}
+  .foot .grow{flex:1}
 
-  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:8px}
-  .stat{background:var(--panel);padding:26px 24px}
-  .stat .n{font-family:var(--mono);font-size:44px;font-weight:600;letter-spacing:-.02em}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden;margin-top:8px}
+  .stat{background:var(--panel);padding:20px 20px}
+  .stat .n{font-family:var(--mono);font-size:34px;font-weight:600;letter-spacing:-.02em}
   .stat .n.a{color:var(--amber)}.stat .n.g{color:var(--good)}.stat .n.s{color:var(--steel)}
-  .stat .l{font-size:15px;color:var(--dim);margin-top:8px}
+  .stat .l{font-size:13.5px;color:var(--dim);margin-top:7px;line-height:1.35}
 
-  .qa{border-left:3px solid var(--amber);padding:6px 0 6px 22px;margin-bottom:26px}
-  .qa .q{font-family:var(--mono);font-size:16px;color:var(--dim);margin-bottom:8px}
-  .qa .a{font-size:22px;line-height:1.4}
-  .cite{font-family:var(--mono);font-size:16px;color:var(--amber);border:1px solid #C9821F;border-radius:2px;padding:0 6px}
-  .qa.none .a{color:var(--dim)}
-
-  table{border-collapse:collapse;width:100%;font-size:19px;margin-top:6px}
-  th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--line)}
-  th{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  table{border-collapse:collapse;width:100%;font-size:18px;margin-top:4px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+  th{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:600}
   td.tab{font-family:var(--mono);font-variant-numeric:tabular-nums}
   .v-ok{color:var(--good)}.v-cond{color:var(--warn)}.v-rej{color:var(--bad)}
   .stamp{display:inline-block;font-family:var(--mono);font-weight:700;font-size:14px;letter-spacing:.05em;
-    border:2px solid;border-radius:3px;padding:6px 11px;transform:rotate(-2deg)}
+    border:2.5px solid;border-radius:4px;padding:8px 12px;transform:rotate(-2deg)}
   .stamp.ok{color:var(--good);border-color:var(--good)}
   .stamp.rej{color:var(--bad);border-color:var(--bad)}
 
-  .arch{font-family:var(--mono);font-size:16px;line-height:1.9;color:var(--dim);
-    background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:26px 30px;white-space:pre;overflow:auto}
-  .arch b{color:var(--ink);font-weight:600}.arch .a{color:var(--amber)}
+  .qa{border-left:3px solid var(--amber);padding:5px 0 5px 20px;margin-bottom:22px}
+  .qa .q{font-family:var(--mono);font-size:15px;color:var(--dim);margin-bottom:7px}
+  .qa .a{font-size:20px;line-height:1.45}
+  .cite{font-family:var(--mono);font-size:15px;color:var(--amber);border:1px solid #C9821F;border-radius:3px;padding:0 6px;white-space:nowrap}
+  .qa.none .a{color:var(--dim)}
 
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:26px 28px}
-  .card h3{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-  .card p{font-size:17px;color:var(--dim);line-height:1.5}
-  .tagn{font-family:var(--mono);font-size:12px;color:var(--faint);border:1px solid var(--line);border-radius:2px;padding:2px 8px}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:22px 24px}
+  .card h3{font-size:20px;font-weight:700;margin-bottom:8px;display:flex;gap:10px;align-items:center}
+  .card p{font-size:16px;color:var(--dim);line-height:1.5}
+  .tagn{font-family:var(--mono);font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:2px;padding:2px 7px}
 
+  .mono-log{font-family:var(--mono);font-size:14.5px;line-height:1.75;color:var(--dim);
+    background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px 24px;white-space:pre;overflow:hidden}
+  .mono-log b{color:var(--ink);font-weight:600}.mono-log .a{color:var(--amber)}.mono-log .g{color:var(--good)}.mono-log .r{color:var(--bad)}
+
+  .list{margin-top:6px}
+  .li{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:17.5px;line-height:1.45}
+  .li:last-child{border-bottom:0}
+  .li .m{font-family:var(--mono);font-size:13px;color:var(--amber);white-space:nowrap;padding-top:3px;min-width:86px}
+  .li .fix{color:var(--dim)} .li .fix b{color:var(--ink)}
+
+  .loss{display:flex;align-items:flex-end;gap:5px;height:120px;margin:14px 0 6px}
+  .loss i{flex:1;background:var(--amber);border-radius:2px 2px 0 0;opacity:.9}
   .hint{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;padding:6px 0 30px}
   @media print{
     html,body{background:#fff}
@@ -67,44 +78,50 @@
   }
 </style></head>
 <body>
-<div class="hint">MixMind deck — scroll to review · File → Print → Save as PDF for the submission</div>
+<div class="hint">MixMind deck · scroll to review · File → Print → Save as PDF for submission</div>
 <div class="deck">
 
-  <!-- 1 -->
+  <!-- 01 · HOOK -->
   <section class="slide">
     <div class="num">01</div>
-    <div class="kick">AMD Developer Hackathon · ACT II · Unicorn</div>
+    <div class="kick">AMD Developer Hackathon · ACT II · Track 3 Unicorn</div>
     <div class="spacer"></div>
-    <h1>MixMind</h1>
-    <div class="big" style="margin-top:22px">A plant's <em>R&amp;D department</em>, running on its own hardware.</div>
+    <h1>The AI committee <em>rejected</em> the cheapest, greenest mix.</h1>
+    <div class="sub" style="font-size:21px">Because the bricks would have failed on the factory floor. That judgment — cheaper, greener, <b>but never below spec</b> — is MixMind.</div>
     <div class="spacer"></div>
-    <div class="foot"><span><b>Self-hosted</b> on AMD Radeon</span><span><b>Brain</b> Gemma 4</span><span>Built by a machine operator at a North American precast plant</span></div>
+    <div class="foot"><span><b>MixMind</b> — a plant-private concrete-mix AI on AMD</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span><span class="amber">hellotravisss.github.io/mixmind/web</span></div>
   </section>
 
-  <!-- 2 -->
+  <!-- 02 · PROBLEM -->
   <section class="slide">
     <div class="num">02</div>
     <div class="kick">The problem</div>
-    <h2>Concrete is 8% of global CO₂ — and mix R&amp;D is locked in a few corporate labs.</h2>
-    <div class="big">Most producers can't optimize their mix. And no plant will send its recipes to a third-party AI.</div>
-    <div class="sub">So the intelligence has to run <span class="amber">on the plant's own hardware</span> — private by construction.</div>
+    <h2>Concrete is <em>8% of global CO₂</em>. The know-how to fix a mix sits in labs most plants can't afford.</h2>
+    <div class="big" style="color:var(--dim);font-weight:500">And no plant will ever upload its recipes to a third-party AI — the mix design <b style="color:var(--ink)">is</b> the business.</div>
     <div class="spacer"></div>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat"><div class="n a">~8%</div><div class="l">of global CO₂ is cement &amp; concrete</div></div>
+      <div class="stat"><div class="n s">1 in 1000s</div><div class="l">plants has a mix-R&amp;D department</div></div>
+      <div class="stat"><div class="n g">0</div><div class="l">recipes a plant will send to a cloud API</div></div>
+    </div>
+    <div class="foot"><span>So the intelligence has to run <b>inside the fence</b> — on hardware the plant owns.</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 3 -->
+  <!-- 03 · WHAT IT IS -->
   <section class="slide">
     <div class="num">03</div>
-    <div class="kick">What it is</div>
-    <h2>A plant-private AI, self-hosted on an AMD GPU.</h2>
-    <div class="two" style="margin-top:8px">
-      <div class="card"><h3>Floor Copilot <span class="tagn">01</span></h3><p>Answers the plant's own floor knowledge, cites the source, and refuses when it doesn't know.</p></div>
-      <div class="card"><h3>Mix Committee <span class="tagn">02</span></h3><p>Four AI specialists debate a recipe change against a real strength model, and return a verdict.</p></div>
+    <div class="kick">MixMind</div>
+    <h2>A plant's R&amp;D department, self-hosted on its own AMD GPU.</h2>
+    <div class="two" style="margin-top:6px">
+      <div class="card"><h3>Floor Copilot <span class="tagn">RAG · cited</span></h3><p>Answers the plant's own shop-floor knowledge — silo bridging, curled edges, wet sand — cites the note id, and refuses when it doesn't know.</p></div>
+      <div class="card"><h3>Mix Committee <span class="tagn">4 agents · grounded</span></h3><p>Standard, QC, Cost and Carbon officers debate a recipe change against a real strength model, and stamp a verdict.</p></div>
     </div>
-    <div class="sub">Facts live in a swappable knowledge base; the fine-tuned model brings the reasoning and the voice.</div>
+    <div class="sub">Facts live in a <b>swappable knowledge base</b> — point the same fine-tuned model at another plant's notes and it serves that plant. The recipe never leaves the building.</div>
     <div class="spacer"></div>
+    <div class="foot"><span><b>Brain</b> Gemma 4 12B · LoRA fine-tuned · AMD ROCm</span><span class="grow"></span><span class="amber">live demo: hellotravisss.github.io/mixmind/web</span></div>
   </section>
 
-  <!-- 4 -->
+  <!-- 04 · COPILOT PROOF -->
   <section class="slide">
     <div class="num">04</div>
     <div class="kick">Floor Copilot · grounded &amp; honest</div>
@@ -114,79 +131,149 @@
     <div class="qa none"><div class="q">What is the current market price of grey cement?</div>
       <div class="a">I don't have a note on that.</div></div>
     <div class="spacer"></div>
-    <div class="foot"><span>Answers a generic model can't give — and won't invent what it doesn't know.</span></div>
+    <div class="stats" style="grid-template-columns:repeat(2,1fr)">
+      <div class="stat"><div class="n g">100%</div><div class="l">grounded citation accuracy — 9/9 held-out phrasings, correct note cited, distractor note avoided</div></div>
+      <div class="stat"><div class="n a">0</div><div class="l">invented answers — off-notes questions get an honest refusal, by training and by design</div></div>
+    </div>
+    <div class="foot"><span>Measured on the self-hosted model · eval logs in repo <b>Docs/mi300x-logs/</b></span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 5 -->
+  <!-- 05 · COMMITTEE TABLE -->
   <section class="slide">
     <div class="num">05</div>
-    <div class="kick">Mix Committee · the money slide</div>
-    <h2>Four specialists debate the change — grounded in real numbers.</h2>
+    <div class="kick">Mix Committee · four specialists, real numbers</div>
+    <h2>Every claim in the debate is a computed number.</h2>
     <table>
-      <tr><th>Proposed change</th><th>28-day</th><th>2-day · demould ≥12</th><th>Cost</th><th>CO₂</th><th>Verdict</th></tr>
+      <tr><th>Proposed change</th><th>28-day MPa</th><th>2-day · demould ≥12</th><th>Cost/unit</th><th>CO₂</th><th>Verdict</th></tr>
       <tr><td>Sweet spot</td><td class="tab">52.6</td><td class="tab v-ok">16.1 ✓</td><td class="tab">$87.9</td><td class="tab v-ok">−17%</td><td class="v-ok">APPROVED</td></tr>
-      <tr><td>20% cement → slag</td><td class="tab">46.3</td><td class="tab v-cond">12.7 ✓</td><td class="tab">$88.2</td><td class="tab v-ok">−18%</td><td class="v-cond">CONDITIONS</td></tr>
-      <tr><td>Aggressive 45% slag</td><td class="tab">36.0</td><td class="tab v-rej">8.0 ✗</td><td class="tab">$84.8</td><td class="tab v-ok">−40%</td><td class="v-rej">REJECTED</td></tr>
+      <tr><td>20% cement → slag</td><td class="tab">46.3</td><td class="tab v-cond">12.7 ✓ tight</td><td class="tab">$88.2</td><td class="tab v-ok">−18%</td><td class="v-cond">CONDITIONS · 1-week pilot</td></tr>
+      <tr><td>Aggressive · 45% slag</td><td class="tab">36.0</td><td class="tab v-rej">8.0 ✗</td><td class="tab">$84.8</td><td class="tab v-ok">−40%</td><td class="v-rej">REJECTED</td></tr>
     </table>
-    <div class="sub">Strength from a model trained on 1,030 real lab tests (R²=0.91). Cost &amp; CO₂ are arithmetic. The LLM writes the debate — not the numbers.</div>
+    <div class="sub">Strength: gradient boosting on <b>1,030 real lab tests</b> (UCI · Yeh 1998), held-out <b>R²=0.910, MAE 3.46 MPa</b>. Cost &amp; CO₂: deterministic arithmetic. The LLM writes the debate — <b>never the numbers</b>.</div>
     <div class="spacer"></div>
+    <div class="foot"><span>Live: drag cement/slag sliders — verdict flips in real time</span><span class="grow"></span><span class="amber">hellotravisss.github.io/mixmind/web</span></div>
   </section>
 
-  <!-- 6 -->
+  <!-- 06 · JUDGMENT -->
   <section class="slide">
     <div class="num">06</div>
-    <div class="kick">Judgment, not a yes-man</div>
+    <div class="kick">The moment that matters</div>
     <div class="spacer"></div>
-    <div style="display:flex;gap:24px;align-items:center;margin-bottom:24px"><span class="stamp rej">REJECTED</span>
-      <div class="big" style="font-size:26px">It rejects the <span class="amber">cheapest and greenest</span> option on the board.</div></div>
-    <h2 style="font-size:32px">The aggressive mix saves the most money and cuts CO₂ 40% — but 2-day strength is 8.0 MPa, below the 12.0 demould spec.</h2>
-    <div class="sub">The strength model learned slag's early-strength penalty from real data. QC blocks it on safety, over savings.</div>
+    <div style="display:flex;gap:26px;align-items:center;margin-bottom:22px"><span class="stamp rej">REJECTED</span>
+      <div class="big">The 45%-slag mix saves the most money and cuts CO₂ 40% — and the committee kills it.</div></div>
+    <div class="sub" style="font-size:20px">Predicted 2-day strength: <b>8.0 MPa</b>, below the 12.0 demould spec — the units would stick and chip at demould. The model learned slag's early-strength penalty <b>from the data</b>; nobody hard-coded that rule. Judgment, not a yes-man.</div>
     <div class="spacer"></div>
+    <div class="foot"><span>QC officer: "I cannot sign off on this."</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 7 -->
+  <!-- 07 · FINE-TUNE -->
   <section class="slide">
     <div class="num">07</div>
-    <div class="kick">Why it runs on AMD</div>
-    <h2>Data sovereignty → self-hosted → affordable.</h2>
-    <div class="big" style="font-size:24px;margin-bottom:20px">A plant won't send recipes to an API. So the model runs on the plant's own AMD Radeon GPU — trained on AMD, and small enough to serve on ~$4k of hardware, not a $200k box.</div>
-    <div class="stats">
-      <div class="stat"><div class="n a">R² 0.910</div><div class="l">Strength model · 1030 lab tests</div></div>
-      <div class="stat"><div class="n g">−17%</div><div class="l">CO₂, strength held</div></div>
-      <div class="stat"><div class="n s">0 bytes</div><div class="l">recipe data sent off-site</div></div>
+    <div class="kick">Fine-tuned on AMD · measured, not promised</div>
+    <h2>A 287 MB adapter turns Gemma 4 into <em>this plant's</em> engineer.</h2>
+    <div class="two">
+      <div>
+        <div class="mono-log">LoRA r=16 · 65.5M trainable (0.55% of 12B)
+42-example plant SFT set · 3 epochs · 60 steps
+<b>loss 3.029 → 0.001</b> · <span class="a">&lt;1 min on MI300X</span>
+saved adapter → mixmind-gemma4-lora (287 MB)</div>
+        <div class="loss" aria-hidden="true">
+          <i style="height:100%"></i><i style="height:57%"></i><i style="height:49%"></i><i style="height:12%"></i><i style="height:4%"></i><i style="height:22%"></i><i style="height:33%"></i><i style="height:41%"></i><i style="height:9%"></i><i style="height:3%"></i><i style="height:16%"></i><i style="height:12%"></i><i style="height:6%"></i>
+        </div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--faint)">training loss · 60 steps</div>
+      </div>
+      <div>
+        <div class="sub" style="margin-top:0;font-size:17.5px">Measured before → after on held-out prompts:</div>
+        <div class="list">
+          <div class="li"><span class="m">diagnosis</span><span class="fix">answers now <b>lead with the likely culprit</b> instead of paraphrasing the note</span></div>
+          <div class="li"><span class="m">−15% length</span><span class="fix">tighter, plant-voice answers</span></div>
+          <div class="li"><span class="m">honest</span><span class="fix">citations were already 100% with prompting — fine-tuning bakes the <b>behavior into the weights</b>, and each plant retrains on its own floor data</span></div>
+        </div>
+      </div>
     </div>
     <div class="spacer"></div>
+    <div class="foot"><span>Full train + eval logs: <b>Docs/mi300x-logs/</b></span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 8 -->
+  <!-- 08 · WHY AMD -->
   <section class="slide">
     <div class="num">08</div>
-    <div class="kick">Architecture</div>
+    <div class="kick">Why AMD · the part everyone else argues differently</div>
+    <h2>Everyone proves AMD can go <em>big</em>. We prove it goes <em>small enough to afford</em>.</h2>
+    <div class="two" style="margin-top:4px">
+      <div class="card"><h3>Radeon PRO W7900 · 48 GB <span class="tagn">~$4k · in the plant</span></h3>
+        <p class="mono-log" style="border:0;padding:10px 0 0;background:none;font-size:13.5px">GPU[0] Card Vendor: Advanced Micro
+Devices, Inc. [AMD/ATI] · gfx1100
+VRAM Total: 51,522,830,336 B</p>
+        <p style="margin-top:8px">Runs the full product — fine-tuned Gemma 4, Copilot, Committee. Private AI a small plant can actually buy.</p></div>
+      <div class="card"><h3>Instinct MI300X · 192 GB <span class="tagn">$1.99/hr · for training</span></h3>
+        <p class="mono-log" style="border:0;padding:10px 0 0;background:none;font-size:13.5px">GPU[0] Card Series: AMD Instinct
+MI300X VF · gfx942
+VRAM Total: 205,822,885,888 B</p>
+        <p style="margin-top:8px">Fine-tune in under a minute on AMD Developer Cloud, ship the 287 MB adapter back to the plant card.</p></div>
+    </div>
+    <div class="sub">Train big, serve cheap — <b>both ends AMD</b>, verified with rocm-smi on real hardware (evidence in repo).</div>
     <div class="spacer"></div>
-    <div class="arch">Operator (plain English)
-      │
-      ▼
-<b>Gemma 4</b> — fine-tuned, self-hosted on <span class="a">AMD Radeon (ROCm)</span>
-      │
-      ├─ <b>Floor Copilot</b>  → retrieval over plant notes → grounded, cited answer
-      │
-      └─ <b>Mix Committee</b>  → Standard · QC · Cost · Carbon
-                           ├─ strength model  (UCI-trained, R²=0.91)
-                           └─ cost / CO₂       (arithmetic)
-                           → minutes + verdict</div>
-    <div class="spacer"></div>
-    <div class="foot"><span>Swap the knowledge base → serve a different plant. Same model.</span></div>
+    <div class="foot"><span><b>Stack</b> ROCm 7.2 · PyTorch 2.10 · transformers · PEFT · Fireworks AI (eval judge)</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 9 -->
+  <!-- 09 · WHAT BROKE -->
   <section class="slide">
     <div class="num">09</div>
-    <div class="kick">Where this goes</div>
-    <h2>Every plant that can't afford a research lab — gets one it can run itself.</h2>
-    <div class="big" style="font-size:23px;color:var(--dim)">Small precast plants, builders, and producers in underserved regions: a private, affordable mix optimizer that keeps their recipes in the building and cuts cement.</div>
-    <div class="sub" style="font-size:17px">Honest boundary: trained on wet-cast lab data; for dry-cast pavers we predict <span class="amber">directions, not certified mixes</span>. Load-bearing changes go to a qualified engineer.</div>
+    <div class="kick">What broke on the way · real time on real hardware</div>
+    <h2>The failures we hit — and shipped through.</h2>
+    <div class="list" style="font-size:17px">
+      <div class="li"><span class="m">env</span><span class="fix"><b>!pip installs missed the Jupyter kernel</b> on the AMD notebook — deps must go in with %pip, then restart</span></div>
+      <div class="li"><span class="m">versions</span><span class="fix">Gemma 4 needs <b>transformers ≥5.13</b>, which conflicts with the preinstalled ROCm vLLM (&lt;5) — we serve via transformers, vLLM serving is a next step</span></div>
+      <div class="li"><span class="m">tokenizer</span><span class="fix">transformers 5.x <b>apply_chat_template dtype crash</b> in our trainer — fixed with return_dict=True (train_lora.py)</span></div>
+      <div class="li"><span class="m">model</span><span class="fix">with no notes provided, base <b>and</b> fine-tuned model can hallucinate a citation — v2 dataset adds "no notes → no citation" examples</span></div>
+      <div class="li"><span class="m">honesty</span><span class="fix">citation accuracy was already 100% at base with prompting — we report it as a <b>system</b> metric, not a fine-tune gain</span></div>
+    </div>
     <div class="spacer"></div>
-    <div class="foot"><span><b>MixMind</b></span><span>Gemma 4 · AMD Radeon · ROCm · PEFT · UCI Concrete (Yeh 1998) · Fireworks AI</span></div>
+    <div class="foot"><span>Every fix is in the repo history — nothing staged.</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
+  </section>
+
+  <!-- 10 · HONEST BOUNDARY -->
+  <section class="slide">
+    <div class="num">10</div>
+    <div class="kick">Honest boundary</div>
+    <div class="spacer"></div>
+    <h2 style="max-width:24ch">We predict <em>directions</em>. We don't certify mixes.</h2>
+    <div class="sub" style="font-size:19px">The strength model is trained on wet-cast lab data; dry-cast paver production differs. So MixMind proposes and screens — the plant's QC still owns the final call, and load-bearing changes go to a qualified engineer. <b>That division of labor is the product, not a disclaimer.</b></div>
+    <div class="spacer"></div>
+    <div class="foot"><span>Yeh, I-C. (1998), Cement and Concrete Research · UCI ML Repository</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
+  </section>
+
+  <!-- 11 · WHERE IT GOES -->
+  <section class="slide">
+    <div class="num">11</div>
+    <div class="kick">Where this goes</div>
+    <h2>Every plant that can't afford a research lab gets one it can run itself.</h2>
+    <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:2px">
+      <div class="stat"><div class="n a">1</div><div class="l">GPU in the plant office — the whole stack, on-prem</div></div>
+      <div class="stat"><div class="n s">swap the KB</div><div class="l">same model serves the next plant — knowledge is retrieval, not weights</div></div>
+      <div class="stat"><div class="n g">tonnes</div><div class="l">of CO₂ per plant-year from cement cut at held strength</div></div>
+    </div>
+    <div class="sub">Small precast plants, block producers, builders in underserved regions — the operators who touch the mix every day, finally with an R&amp;D department that answers back. <b>Built by one of them.</b></div>
+    <div class="spacer"></div>
+    <div class="foot"><span>Next: vLLM serving · plant-data flywheel · multi-plant pilots</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
+  </section>
+
+  <!-- 12 · CLOSE -->
+  <section class="slide">
+    <div class="num">12</div>
+    <div class="kick">MixMind</div>
+    <div class="spacer"></div>
+    <div class="stats">
+      <div class="stat"><div class="n g">−17%</div><div class="l">CO₂, strength held</div></div>
+      <div class="stat"><div class="n a">R² 0.910</div><div class="l">strength model · 1,030 lab tests</div></div>
+      <div class="stat"><div class="n g">100%</div><div class="l">grounded citations · 9/9 held-out</div></div>
+      <div class="stat"><div class="n s">0 bytes</div><div class="l">of recipe data sent off-site</div></div>
+    </div>
+    <h2 style="margin-top:30px">White cement, grey cement, slag, chips — <em>I touch these every day.</em></h2>
+    <div class="sub">MixMind is a machine operator's answer to a question the industry keeps asking: what if the plants that make the world's most-used material could afford the intelligence to make it cleaner?</div>
+    <div class="spacer"></div>
+    <div class="foot"><span><b>Repo</b> github.com/Hellotravisss/mixmind</span><span><b>Live</b> hellotravisss.github.io/mixmind/web</span><span class="grow"></span><span class="amber">Gemma 4 · AMD Radeon + Instinct · ROCm</span></div>
   </section>
 
 </div>

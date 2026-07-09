@@ -16,3 +16,9 @@ __pycache__/
 
 # local preview config
 .claude/launch.json
+
+# model artifacts (reproduce via train_lora.py; too large for git)
+data/finetune/adapter/
+
+# competitor study material — never publish
+AMD Hackthon I Final PPT/
