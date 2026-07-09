@@ -70,7 +70,19 @@
 
   .loss{display:flex;align-items:flex-end;gap:5px;height:120px;margin:14px 0 6px}
   .loss i{flex:1;background:var(--amber);border-radius:2px 2px 0 0;opacity:.9}
-  .hint{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;padding:6px 0 30px}
+    .chipsrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .chip{font-family:var(--mono);font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:100px;padding:7px 13px;white-space:nowrap}
+  .chip.hot{color:var(--amber);border-color:rgba(233,161,60,.5)}
+  .steps{margin-top:8px}
+  .stepli{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:19px;align-items:baseline}
+  .stepli:last-child{border-bottom:0}
+  .stepli .sn{font-family:var(--mono);font-size:13px;color:var(--amber);border:1px solid rgba(233,161,60,.5);border-radius:50%;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .stepli b{font-weight:700}
+  .bizrow{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:19px}
+  .bizrow:last-child{border-bottom:0}
+  .bizrow .arrow{color:var(--amber);font-family:var(--mono)}
+  .bizrow b{font-family:var(--mono);font-weight:600}
+.hint{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;padding:6px 0 30px}
   @media print{
     html,body{background:#fff}
     .deck{max-width:none;padding:0}.hint{display:none}
@@ -88,6 +100,13 @@
     <div class="spacer"></div>
     <h1>The AI committee <em>rejected</em> the cheapest, greenest mix.</h1>
     <div class="sub" style="font-size:21px">Because the bricks would have failed on the factory floor. That judgment — cheaper, greener, <b>but never below spec</b> — is MixMind.</div>
+    <div class="chipsrow">
+      <span class="chip">Gemma 4 12B · LoRA fine-tuned</span>
+      <span class="chip">AMD Radeon W7900 + Instinct MI300X · ROCm</span>
+      <span class="chip">strength model R² 0.910 · measured</span>
+      <span class="chip">open source</span>
+      <span class="chip hot">LIVE — hellotravisss.github.io/mixmind/web</span>
+    </div>
     <div class="spacer"></div>
     <div class="foot"><span><b>MixMind</b> — a plant-private concrete-mix AI on AMD</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span><span class="amber">hellotravisss.github.io/mixmind/web</span></div>
   </section>
@@ -244,9 +263,26 @@ VRAM Total: 205,822,885,888 B</p>
     <div class="foot"><span>Yeh, I-C. (1998), Cement and Concrete Research · UCI ML Repository</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
-  <!-- 11 · WHERE IT GOES -->
+
+  <!-- BUSINESS -->
   <section class="slide">
     <div class="num">11</div>
+    <div class="kick">The business · bottom-up, all figures public-ballpark estimates</div>
+    <h2>A mid-size plant spends <em>~$1M+ a year</em> on cement. We sell the tool that trims it.</h2>
+    <div class="list" style="font-size:19px">
+      <div class="bizrow"><span>Mid-size paver/block plant (~30 t cement/day)</span><span class="arrow">→</span><b>~$1.0–1.5M/yr</b><span style="color:var(--dim)">cement spend</span></div>
+      <div class="bizrow"><span>SCM substitution + trimming over-design</span><span class="arrow">→</span><b>5–19% less cement</b><span style="color:var(--dim)">committee-screened, spec held</span></div>
+      <div class="bizrow"><span>Recovered per plant</span><span class="arrow">→</span><b>$50K–250K / plant-yr</b><span style="color:var(--dim)">+ proportional CO₂ cut</span></div>
+      <div class="bizrow"><span>MixMind at <b>$2K/plant/mo</b>, self-hosted on one AMD GPU</span><span class="arrow">→</span><b>&lt;20% of savings</b><span style="color:var(--dim)">pays back in the first month</span></div>
+    </div>
+    <div class="sub" style="font-size:17px">The alternative is a materials engineer (<b>$90–120K/yr</b>) or a consultant retainer — which is why most of the ~3,000 North-American precast plants simply don't optimize. That's a <b>$0.3–0.8B/yr</b> recoverable-spend wedge, and the on-prem AMD box is what makes the price point possible.</div>
+    <div class="spacer"></div>
+    <div class="foot"><span>Estimates: public cement prices + plant-scale ballparks · operator-verified order of magnitude</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
+  </section>
+
+  <!-- 11 · WHERE IT GOES -->
+  <section class="slide">
+    <div class="num">12</div>
     <div class="kick">Where this goes</div>
     <h2>Every plant that can't afford a research lab gets one it can run itself.</h2>
     <div class="stats" style="grid-template-columns:repeat(3,1fr);margin-top:2px">
@@ -259,9 +295,24 @@ VRAM Total: 205,822,885,888 B</p>
     <div class="foot"><span>Next: vLLM serving · plant-data flywheel · multi-plant pilots</span><span class="grow"></span><span>github.com/Hellotravisss/mixmind</span></div>
   </section>
 
+
+  <!-- TRY IT -->
+  <section class="slide">
+    <div class="num">13</div>
+    <div class="kick">Try it yourself · 90 seconds, no login</div>
+    <h2 style="margin-bottom:10px"><em>hellotravisss.github.io/mixmind/web</em></h2>
+    <div class="steps">
+      <div class="stepli"><span class="sn">1</span><span><b>Ask the floor:</b> type a real shop-floor question — or try "what's the market price of cement?" and watch it <b>refuse</b> instead of guess.</span></div>
+      <div class="stepli"><span class="sn">2</span><span><b>The committee:</b> pick <b>"Aggressive · 45% slag"</b> — the cheapest, greenest mix — and watch QC stamp it <b style="color:var(--bad)">REJECTED</b> on early strength.</span></div>
+      <div class="stepli"><span class="sn">3</span><span><b>Drive the mix:</b> drag cement down until the verdict flips; type <b>your</b> cement price into the price panel and watch the economics recompute.</span></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="foot"><span>Static demo mirrors the self-hosted stack; the fine-tuned model runs on the AMD box (see video)</span><span class="grow"></span><span class="amber">github.com/Hellotravisss/mixmind</span></div>
+  </section>
+
   <!-- 12 · CLOSE -->
   <section class="slide">
-    <div class="num">12</div>
+    <div class="num">14</div>
     <div class="kick">MixMind</div>
     <div class="spacer"></div>
     <div class="stats">
@@ -272,6 +323,7 @@ VRAM Total: 205,822,885,888 B</p>
     </div>
     <h2 style="margin-top:30px">White cement, grey cement, slag, chips — <em>I touch these every day.</em></h2>
     <div class="sub">MixMind is a machine operator's answer to a question the industry keeps asking: what if the plants that make the world's most-used material could afford the intelligence to make it cleaner?</div>
+    <div class="big" style="margin-top:18px;color:var(--amber)">Open the live demo. Ask it a floor question. Pull the cement down.</div>
     <div class="spacer"></div>
     <div class="foot"><span><b>Repo</b> github.com/Hellotravisss/mixmind</span><span><b>Live</b> hellotravisss.github.io/mixmind/web</span><span class="grow"></span><span class="amber">Gemma 4 · AMD Radeon + Instinct · ROCm</span></div>
   </section>
