@@ -1,0 +1,11 @@
+Fireworks LLM-judge (model: accounts/fireworks/models/kimi-k2p6, blind A/B, temp=0, seed=42)
+Cases: 3 held-out prompts from Docs/mi300x-logs/eval-before-after.log
+
+[grounded-cite] judge prefers: FINE-TUNED  (blind order: A=BASE)
+  reason: Answer B leads with the direct cause-and-action for high readings (sludge), cites only the relevant note, and delivers a more concise, direct plant-floor voice.
+[refusal] judge prefers: TIE  (blind order: A=FT)
+  reason: Both answers are identically concise, correctly refuse the off-topic pricing question, and properly avoid citing irrelevant plant notes or inventing a diagnosis.
+[concise-domain] judge prefers: FINE-TUNED  (blind order: A=FT)
+  reason: Answer A is more concise and speaks in a direct plant-floor voice that leads with the mechanism and outcome, even though both answers incorrectly cite note IDs when no notes were provided.
+
+RESULT: judge preferred the FINE-TUNED answer on 2/3 cases.
