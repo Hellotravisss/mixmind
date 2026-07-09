@@ -62,8 +62,35 @@ the auger is stopped** — material can drop or the auger can turn without warni
 If **early strength is low in winter**, check the **cure area temperature** first — cold spots near
 the door slow hydration. Rotate racks or extend cure time before touching the mix.
 
+### KB-13 · Process — the sound tells you the compaction
+If the press sounds like a **low rumbling motorcycle** during main vibration, the board/mold is
+lifting off the vibrating table and compaction suffers. Tune until you hear an **almost continuous,
+high-pitched hum** — that's roughly twice the impacts in the same vibration time, and a much
+better-compacted stone.
+
+### KB-14 · Process — check the vibrator amps after a product change
+If tamperhead pressure is set too high, the **vibrator current (amps) during main vibration drops
+below its starting value** — you can see it on the vibrator settings page. Re-tune the machine by
+power consumption at every product change.
+
+### KB-15 · Process — edges compacted harder than the middle
+Load pressure set too high stops the table vibrating freely and makes it **sway**: outside stones
+come out more compacted / shorter than the middle ones. Reduce load pressure first, then take back
+the angle and correct the mold clamping pressure.
+
+### KB-16 · Process — tuning order after a height change
+Set product height, then reduce the vibration angle in **small steps** (only works if tamperhead
+pressure comes down with it), then trim main vibration time in small increments. Always **measure
+stone height on the product** — the display can read high.
+
+### KB-17 · Reference — typical press setting ranges
+Impact bar gap 0.6–0.7 mm. Speed 2800–3000 rpm up to 80 mm product height; above 100 mm run
+2400–2700 rpm with angle ≥120°. Angle 65° from 40 mm height up to max 90° at 60–80 mm — add up to
+20° if the mix runs too dry. Tamperhead low 15–20 bar, high 20–40 bar (up to 80 by product). Mold
+clamping 2–3.5 bar. **Vibration force set too high = the product will not compact properly.**
+
 ---
 
-*12 illustrative entries across Reliability, Process, Quality, Testing, Materials, Maintenance,
+*17 illustrative entries across Reliability, Process, Quality, Testing, Materials, Maintenance,
 Safety. Expandable. Each is the kind of answer a generic LLM cannot give — which is the whole point
 of a plant-private Copilot.*

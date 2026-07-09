@@ -485,7 +485,13 @@
     {id:"KB-10",text:"When washing out the mixer, tap along the inlet pipe - leftover cement or pigment hides there and contaminates the next colour.",
      kw:"wash washout mixer clean inlet pipe leftover cement pigment contaminate next colour tap"},
     {id:"KB-12",text:"If early strength is low in winter, check the cure area temperature first - cold spots near the door slow hydration. Rotate racks or extend cure time.",
-     kw:"early strength low winter cold cure temperature hydration weak door rack extend"}
+     kw:"early strength low winter cold cure temperature hydration weak door rack extend"},
+    {id:"KB-13",text:"If the press sounds like a low rumbling motorcycle during main vibration, the board or mold is lifting off the vibrating table and compaction suffers. Tune until it is an almost continuous high-pitched hum - twice the impacts, much better compaction.",
+     kw:"press sound sounds noise motorcycle harley rumble rumbling low frequency vibration vibrating board mold lift lifting hum compaction compact table"},
+    {id:"KB-15",text:"Load pressure set too high stops the table vibrating freely and makes it sway: outside stones come out more compacted and shorter than the middle. Reduce load pressure, then take back the angle and correct mold clamping pressure.",
+     kw:"load pressure high table sway swaying outside edge edges stones shorter middle uneven compaction height angle clamping mold"},
+    {id:"KB-17",text:"Typical press ranges: impact bar gap 0.6-0.7 mm; 2800-3000 rpm up to 80 mm product (2400-2700 rpm with angle >=120 deg above 100 mm); angle 65-90 deg by height, +20 deg if the mix runs dry; tamperhead low 15-20 / high 20-40 bar; mold clamping 2-3.5 bar.",
+     kw:"press settings setting speed rpm revolutions angle degrees tamperhead pressure bar impact gap mold clamping ranges tall product height dry"}
   ];
   var KWFREQ={};KB.forEach(function(n){var seen={};n.kw.split(" ").forEach(function(w){if(!seen[w]){seen[w]=1;KWFREQ[w]=(KWFREQ[w]||0)+1;}});});
   function retrieve(q){
@@ -500,6 +506,7 @@
   }
   var PRESETS=[
     "Material is stuck in the cement silo \u2014 what do I do?",
+    "The press sounds like a motorcycle during main vibration.",
     "The paver has a curled edge right off the press.",
     "It rained overnight and the sand is soaked.",
     "What is the current market price of grey cement?"

@@ -55,6 +55,27 @@ KNOWLEDGE: list[Note] = [
     Note("KB-12", "Reliability",
          "If early strength is low in winter, check the cure area temperature first - cold spots "
          "near the door slow hydration. Rotate racks or extend cure time before touching the mix."),
+    Note("KB-13", "Process",
+         "If the press sounds like a low rumbling motorcycle during main vibration, the board or "
+         "mold is lifting off the vibrating table and compaction suffers. Tune until it is an "
+         "almost continuous high-pitched hum - twice the impacts, much better compaction."),
+    Note("KB-14", "Process",
+         "If tamperhead pressure is too high, the vibrator current (amps) during main vibration "
+         "drops below its starting value - visible on the vibrator settings page. Re-tune the "
+         "machine by power consumption at every product change."),
+    Note("KB-15", "Process",
+         "Load pressure set too high stops the table vibrating freely and makes it sway: outside "
+         "stones come out more compacted and shorter than the middle. Reduce load pressure, then "
+         "take back the angle and correct mold clamping pressure."),
+    Note("KB-16", "Process",
+         "After a height change: reduce the vibration angle in small steps (only with tamperhead "
+         "pressure coming down too), then trim main vibration time in small increments. Always "
+         "measure stone height on the product - the display can read high."),
+    Note("KB-17", "Reference",
+         "Typical press ranges: impact bar gap 0.6-0.7 mm; 2800-3000 rpm up to 80 mm product "
+         "(2400-2700 rpm with angle >=120 deg above 100 mm); angle 65-90 deg by height, +20 deg if "
+         "the mix runs dry; tamperhead low 15-20 / high 20-40 bar; mold clamping 2-3.5 bar. "
+         "Vibration force too high = the product will not compact properly."),
 ]
 
 BY_ID = {n.id: n for n in KNOWLEDGE}
