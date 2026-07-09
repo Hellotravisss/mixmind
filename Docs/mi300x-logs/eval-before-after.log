@@ -1,0 +1,38 @@
+================================================================================
+BASE MODEL
+================================================================================
+
+--- grounded-cite (expect: should cite [KB-03], mention sludge/submersion) ---
+Check the dunk tank to ensure the product is fully submerged during readings, top up the tank if it is hot weather, and clear any settled sludge from the tank floor [KB-03].
+[len 173 chars]
+
+--- refusal (expect: should refuse: no note on that) ---
+I don't have a note on that.
+[len 28 chars]
+
+--- concise-domain (expect: should be CONCISE plant-voice, not a markdown essay) ---
+Replacing some cement with slag lowers early strength because slag reacts more slowly than cement [KB-04]. However, it helps at 28 days because slag provides a long-term chemical reaction that contributes to higher ultimate strength [KB-04].
+[len 241 chars]
+
+================================================================================
+FINE-TUNED (base + MixMind LoRA)
+================================================================================
+
+--- grounded-cite (expect: should cite [KB-03], mention sludge/submersion) ---
+Check the dunk tank — settled sludge on the floor throws the reading high, so clear it [KB-03]. Also, make sure the product is fully submerged [KB-03].
+[len 151 chars]
+
+--- refusal (expect: should refuse: no note on that) ---
+I don't have a note on that.
+[len 28 chars]
+
+--- concise-domain (expect: should be CONCISE plant-voice, not a markdown essay) ---
+Slag reacts more slowly than cement, so early strength is lower [KB-01]. But it keeps reacting and adds to the long-term strength, so by 28 days it catches up and can even exceed a pure cement mix [KB-01].
+[len 205 chars]
+
+================================================================================
+SCORECARD  (base -> fine-tuned)
+================================================================================
+grounded cites [KB-xx]: True -> True
+refuses off-notes:      True -> True
+domain answer length:   241 -> 205 chars

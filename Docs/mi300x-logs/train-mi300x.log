@@ -1,0 +1,25 @@
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+trainable params: 65,568,768 || all params: 12,025,298,944 || trainable%: 0.5453
+42 training examples
+epoch 1 step 1 loss 3.029
+epoch 1 step 5 loss 1.735
+epoch 1 step 10 loss 1.486
+epoch 1 step 15 loss 0.002
+epoch 1 step 20 loss 0.001
+epoch 2 step 25 loss 0.067
+epoch 2 step 30 loss 1.012
+epoch 2 step 35 loss 1.232
+epoch 2 step 40 loss 0.014
+epoch 3 step 45 loss 0.001
+epoch 3 step 50 loss 0.282
+epoch 3 step 55 loss 0.505
+epoch 3 step 60 loss 0.369
+saved LoRA adapter -> mixmind-gemma4-lora
+
+FINE-TUNED: Replacing a portion of cement with slag (a by-product of the steel-making process) is one of the most common and effective ways to improve the sustainability and performance of concrete.
+
+Here are the primary reasons why this is done, categorized by environmental, economic, and technical factors:
+
+### 1. Environmental Impact (The main driver)
+The carbon footprint of ordinary Portland cement is massive. Roughly **90% of a cement plant's CO₂ emissions** come from calcination and the fuel needed to heat the kiln to extreme temperatures.
+*   **Carbon Savings:** Slag is a by-product, not a primary material, so its embodied carbon is near zero. Replacing a portion of cement with slag directly reduces the carbon footprint of the building.

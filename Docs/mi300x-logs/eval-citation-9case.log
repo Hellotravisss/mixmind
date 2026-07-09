@@ -1,0 +1,24 @@
+
+BASE: 9/9 = 100%
+  OK  want KB-05 got KB-05        The bricks keep curling up along one side as t
+  OK  want KB-06 got KB-06        It stormed last night and the sand pile is dre
+  OK  want KB-07 got KB-07        Grey cement has stopped coming down out of the
+  OK  want KB-08 got KB-08        Stone won't flow through the aggregate gate.
+  OK  want KB-03 got KB-03        Density results look too high this week.
+  OK  want KB-04 got KB-04        This batch looks way darker than the sample bo
+  OK  want KB-09 got KB-09        There's a pile of sand sitting on the weigh sc
+  OK  want KB-12 got KB-12        First batches in cold weather keep coming out 
+  OK  want KB-10 got KB-10        The last colour keeps bleeding into the next b
+
+FINE-TUNED: 9/9 = 100%
+  OK  want KB-05 got KB-05        The bricks keep curling up along one side as t
+  OK  want KB-06 got KB-06        It stormed last night and the sand pile is dre
+  OK  want KB-07 got KB-07        Grey cement has stopped coming down out of the
+  OK  want KB-08 got KB-08        Stone won't flow through the aggregate gate.
+  OK  want KB-03 got KB-03        Density results look too high this week.
+  OK  want KB-04 got KB-04        This batch looks way darker than the sample bo
+  OK  want KB-09 got KB-09        There's a pile of sand sitting on the weigh sc
+  OK  want KB-12 got KB-12        First batches in cold weather keep coming out 
+  OK  want KB-10 got KB-10        The last colour keeps bleeding into the next b
+
+>>> RESULT: grounded citation accuracy 100% -> 100% (9 held-out phrasings, correct-note cited & distractor avoided) <<<
