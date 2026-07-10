@@ -1,13 +1,13 @@
 import React from "react";
 import {
-  AbsoluteFill, Img, Series, interpolate, spring,
+  AbsoluteFill, Audio, Img, Series, interpolate, spring,
   staticFile, useCurrentFrame, useVideoConfig,
 } from "remotion";
 import { C, MONO, SANS } from "./theme";
 
 /* ---------- scene durations (30 fps) ---------- */
 const D = {
-  hook: 330, problem: 480, solution: 450, copilot: 900,
+  hook: 330, problem: 480, solution: 450, copilot: 760,
   committee: 990, optimizer: 360, amd: 690, business: 360, close: 390,
 };
 export const TOTAL_FRAMES = Object.values(D).reduce((a, b) => a + b, 0);
@@ -84,6 +84,7 @@ const Hook: React.FC = () => {
   const dim = interpolate(f, [D.hook - 20, D.hook], [1, 0], { extrapolateLeft: "clamp" });
   return (
     <Fill>
+      <Audio src={staticFile("vo/hook.mp3")} />
       <div style={{ opacity: dim, height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <Kick delay={6}>AMD Developer Hackathon · ACT II · Track 3 Unicorn</Kick>
         <FadeUp delay={20} style={{ fontSize: 118, fontWeight: 800, lineHeight: 1.02, letterSpacing: "-0.03em", maxWidth: 1500 }}>
@@ -103,6 +104,7 @@ const Hook: React.FC = () => {
 
 const Problem: React.FC = () => (
   <Fill>
+      <Audio src={staticFile("vo/problem.mp3")} />
     <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <Kick delay={4}>The problem</Kick>
       <FadeUp delay={16} style={{ fontSize: 150, fontWeight: 800, letterSpacing: "-0.03em" }}>
@@ -122,6 +124,7 @@ const Problem: React.FC = () => (
 
 const Solution: React.FC = () => (
   <Fill>
+      <Audio src={staticFile("vo/solution.mp3")} />
     <Img src={staticFile("paver-render.png")} style={{
       position: "absolute", right: 0, top: 0, height: "100%", opacity: 0.9,
       WebkitMaskImage: "linear-gradient(90deg,transparent 0%,#000 45%)",
@@ -149,6 +152,7 @@ const Copilot: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <Fill>
+      <Audio src={staticFile("vo/copilot.mp3")} />
       <Kick delay={4}>01 · Floor Copilot — ask the floor</Kick>
       <div style={{ display: "flex", flexDirection: "column", gap: 30, marginTop: 10 }}>
         {/* question 1 */}
@@ -207,6 +211,7 @@ const Committee: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <Fill>
+      <Audio src={staticFile("vo/committee.mp3")} />
       <Kick delay={4}>02 · Mix Committee — four specialists, real numbers</Kick>
       <FadeUp delay={14} style={{ fontSize: 58, fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 40 }}>
         Strength from a model trained on 1,030 real lab tests — <span style={{ color: C.amber }}>R² = 0.910</span>
@@ -246,6 +251,7 @@ const Optimizer: React.FC = () => {
   const fail = Number(s2) < 12;
   return (
     <Fill>
+      <Audio src={staticFile("vo/optimizer.mp3")} />
       <Kick delay={4}>03 · Drive the mix — live, on the real model</Kick>
       <FadeUp delay={14} style={{ fontSize: 64, fontWeight: 800, marginBottom: 60 }}>
         Pull the cement down. Watch the verdict react.
@@ -297,6 +303,7 @@ const Amd: React.FC = () => {
   const loss = interpolate(f, [300, 420], [3.029, 0.001], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <Fill>
+      <Audio src={staticFile("vo/amd.mp3")} />
       <Kick delay={4}>Why AMD — verified on real hardware</Kick>
       <FadeUp delay={14} style={{ fontSize: 62, fontWeight: 800, marginBottom: 50, letterSpacing: "-0.02em" }}>
         Everyone proves AMD goes <span style={{ color: C.steel }}>big</span>. We prove it goes{" "}
@@ -336,6 +343,7 @@ const Amd: React.FC = () => {
 
 const Business: React.FC = () => (
   <Fill>
+      <Audio src={staticFile("vo/business.mp3")} />
     <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <Kick delay={4}>The business — bottom-up</Kick>
       <FadeUp delay={16} style={{ fontSize: 68, fontWeight: 800, maxWidth: 1500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
@@ -353,6 +361,7 @@ const Business: React.FC = () => (
 
 const Close: React.FC = () => (
   <Fill>
+      <Audio src={staticFile("vo/close.mp3")} />
     <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <div style={{ display: "flex", gap: 2, border: `1px solid ${C.line}`, borderRadius: 10, overflow: "hidden", marginBottom: 70 }}>
         {[["−17%", "CO₂, strength held", C.good], ["R² 0.910", "1,030 lab tests", C.amber],
