@@ -128,12 +128,6 @@ export function mountHero3D(container, onReady) {
   const points = new THREE.Points(pGeo, pMat);
   group.add(points);
 
-  /* amber "cement cut" line hovering where the smoke dies */
-  const cutMat = new THREE.LineBasicMaterial({ color: 0xe9a13c, transparent: true, opacity: 0.85 });
-  const cutGeo = new THREE.BufferGeometry().setFromPoints([
-    new THREE.Vector3(-0.45, CUT_Y, 0.55), new THREE.Vector3(1.05, CUT_Y, 0.05)]);
-  group.add(new THREE.Line(cutGeo, cutMat));
-
   /* ---- interaction: drag to rotate, gentle idle sway ---- */
   let targetRot = 0, rot = 0, dragging = false, lastX = 0, idle = 0;
   const el = renderer.domElement;
