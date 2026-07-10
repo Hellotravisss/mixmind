@@ -82,6 +82,9 @@
   .bizrow:last-child{border-bottom:0}
   .bizrow .arrow{color:var(--amber);font-family:var(--mono)}
   .bizrow b{font-family:var(--mono);font-weight:600}
+  .heroimg{position:absolute;right:0;top:0;bottom:0;width:54%;object-fit:cover;object-position:center right;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);mask-image:linear-gradient(90deg,transparent 0%,#000 38%);z-index:0}
+  .z{position:relative;z-index:1}
 .hint{text-align:center;color:var(--faint);font-family:var(--mono);font-size:12px;padding:6px 0 30px}
   @page{size:13.333in 7.5in;margin:0}
   @media print{
@@ -98,11 +101,12 @@
   <!-- 01 · HOOK -->
   <section class="slide">
     <div class="num">01</div>
-    <div class="kick">AMD Developer Hackathon · ACT II · Track 3 Unicorn</div>
+    <img class="heroimg" src="assets/paver-render.png" alt="">
+    <div class="kick z">AMD Developer Hackathon · ACT II · Track 3 Unicorn</div>
     <div class="spacer"></div>
-    <h1>The AI committee <em>rejected</em> the cheapest, greenest mix.</h1>
-    <div class="sub" style="font-size:21px">Because the bricks would have failed on the factory floor. That judgment — cheaper, greener, <b>but never below spec</b> — is MixMind.</div>
-    <div class="chipsrow">
+    <h1 class="z" style="max-width:13ch">The AI committee <em>rejected</em> the cheapest, greenest mix.</h1>
+    <div class="sub z" style="font-size:21px;max-width:44ch">Because the bricks would have failed on the factory floor. That judgment — cheaper, greener, <b>but never below spec</b> — is MixMind.</div>
+    <div class="chipsrow z">
       <span class="chip">Gemma 4 12B · LoRA fine-tuned</span>
       <span class="chip">AMD Radeon W7900 + Instinct MI300X · ROCm</span>
       <span class="chip">strength model R² 0.910 · measured</span>
