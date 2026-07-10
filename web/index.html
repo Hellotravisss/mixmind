@@ -207,7 +207,7 @@
   .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
   .legend span{font-family:var(--mono);font-size:12px;color:var(--ink-dim);display:flex;align-items:center;gap:6px}
   .legend span i{width:10px;height:10px;border-radius:2px}
-  .paverimg{width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;
+  .paverimg{transition:opacity .8s ease;width:100%;height:100%;object-fit:cover;border-radius:14px;display:block;
     -webkit-mask-image:radial-gradient(120% 105% at 50% 45%,#000 55%,transparent 98%);
     mask-image:radial-gradient(120% 105% at 50% 45%,#000 55%,transparent 98%)}
   svg text.ax{fill:var(--ink-dim);font-family:var(--mono);font-size:9px}
@@ -689,16 +689,6 @@
   });
   optRender();
 
-  /* upgrade hero still to turntable animation (progressive) */
-  (function(){
-    if(reduce)return;
-    var pa=document.getElementById("paverAnim");
-    if(!pa)return;
-    var t=new Image();
-    t.onload=function(){pa.src=t.src;};
-    t.src="assets/paver-turntable.webp";
-  })();
-
   /* ============ keyboard presenter mode ============ */
   document.addEventListener("keydown",function(e){
     var tag=(e.target.tagName||"").toLowerCase();
@@ -838,4 +828,17 @@
     };
   })();
 })();
+</script>
+
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js"}}</script>
+<script type="module">
+  (function(){
+    var reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+    var scene = document.querySelector(".scene");
+    var still = document.getElementById("paverAnim");
+    if (reduce || !scene || !window.WebGLRenderingContext) return;
+    import("./hero3d.js").then(function(m){
+      m.mountHero3D(scene, function(){ if (still) still.style.opacity = "0"; });
+    }).catch(function(){ /* static hero stays */ });
+  })();
 </script>
