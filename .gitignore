@@ -22,3 +22,7 @@ data/finetune/adapter/
 
 # competitor study material — never publish
 AMD Hackthon I Final PPT/
+
+# remotion build
+video/node_modules/
+video/out/
