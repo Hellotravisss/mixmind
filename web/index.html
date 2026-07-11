@@ -304,6 +304,10 @@
   .copybtn{margin-top:14px;background:none;border:1px solid var(--line);color:var(--ink-dim);font-family:var(--mono);
     font-size:12px;border-radius:8px;padding:9px 14px;cursor:pointer}
   .copybtn:hover{color:var(--ink);border-color:var(--ink-faint)}
+  .herochips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .hchip{font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);border:1px solid var(--line);
+    border-radius:100px;padding:7px 12px;background:color-mix(in srgb,var(--panel) 65%,transparent);white-space:nowrap}
+  .hchip:first-child{color:var(--amber);border-color:rgba(233,161,60,.5)}
 </style>
 
 <div class="mm">
@@ -330,6 +334,12 @@
           <div class="hstat"><b class="a">R&#178; 0.910</b><span>strength model &#183; 1,030 lab tests</span></div>
           <div class="hstat"><b class="g">&#8722;17%</b><span>CO&#8322;, strength held</span></div>
           <div class="hstat"><b>0 bytes</b><span>sent off-site</span></div>
+        </div>
+        <div class="herochips">
+          <span class="hchip">Gemma 4 12B &#183; LoRA fine-tuned</span>
+          <span class="hchip">trained on AMD Instinct MI300X</span>
+          <span class="hchip">served on AMD Radeon &#183; on-prem</span>
+          <span class="hchip">open source</span>
         </div>
       </div>
 
@@ -491,7 +501,7 @@
       <div class="step"><span class="n">AMD</span>
         <div>
           <h2 class="sec">Verified on real AMD hardware.</h2>
-          <p class="lede">Not claims &#8212; command output. Full logs in the repo (<span class="mono" style="font-size:14px">Docs/</span>).</p>
+          <p class="lede">Not claims &#8212; command output. <a href="https://github.com/Hellotravisss/mixmind/tree/main/Docs" style="color:var(--amber)">Full logs in the repo &#8599;</a></p>
         </div>
       </div>
       <div class="figs" style="grid-template-columns:1fr 1fr;margin-top:22px">
@@ -523,7 +533,7 @@ GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
     <span><b>Gemma 4</b> &#183; fine-tuned on AMD Instinct MI300X &#183; served on Radeon (ROCm)</span>
     <span><b>UCI Concrete</b> Yeh 1998 &#183; R&#178;=0.91</span>
     <span>We predict directions &#8212; we don't certify mixes.</span>
-    <span>Built by a plant operator</span>
+    <a href="https://github.com/Hellotravisss/mixmind" style="color:var(--amber);text-decoration:none">GitHub repo &#8599;</a><a href="https://github.com/Hellotravisss/mixmind/blob/main/Docs/MixMind-Deck.pdf" style="color:var(--ink-dim);text-decoration:none">Slide deck &#8599;</a><span>Built by a plant operator</span>
   </div></footer>
 </div>
 
