@@ -308,6 +308,25 @@
   .hchip{font-family:var(--mono);font-size:11.5px;color:var(--ink-dim);border:1px solid var(--line);
     border-radius:100px;padding:7px 12px;background:color-mix(in srgb,var(--panel) 65%,transparent);white-space:nowrap}
   .hchip:first-child{color:var(--amber);border-color:rgba(233,161,60,.5)}
+  /* committee deliberation feed */
+  .debate{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+  .msg{display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);
+    border-radius:10px;padding:14px 16px;opacity:0;transform:translateY(14px)}
+  .msg.show{opacity:1;transform:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.3,1)}
+  .msg.for{border-left-color:var(--good)} .msg.against{border-left-color:var(--bad)} .msg.concern{border-left-color:var(--warn)}
+  .msg .ic{width:30px;height:30px;flex:0 0 auto;border-radius:7px;background:var(--panel-2);display:grid;place-items:center;color:var(--ink-dim);margin-top:2px}
+  .msg .ic svg{width:16px;height:16px}
+  .msg .who{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .stance{font-family:var(--mono);font-size:10px;letter-spacing:.08em;border-radius:3px;padding:2px 7px;text-transform:uppercase}
+  .stance.for{color:var(--good);border:1px solid var(--good)} .stance.against{color:var(--bad);border:1px solid var(--bad)}
+  .stance.concern{color:var(--warn);border:1px solid var(--warn)}
+  .msg .say{font-size:15.5px;color:var(--ink-dim);margin-top:4px;line-height:1.5}
+  .msg .say b{color:var(--ink);font-family:var(--mono);font-weight:600}
+  .tally{font-family:var(--mono);font-size:13px;color:var(--ink-dim);padding:12px 16px;border:1px dashed var(--line);border-radius:10px;
+    opacity:0;transform:translateY(10px)}
+  .tally.show{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
+  .tally b{color:var(--ink)}
+  @media(prefers-reduced-motion:reduce){.msg,.tally{opacity:1;transform:none;transition:none}}
 </style>
 
 <div class="mm">
@@ -420,7 +439,7 @@
         <div id="ageChart" style="margin-top:6px"></div>
       </div></div>
       <div class="tiles" id="tiles"></div>
-      <div class="agents" id="agents"></div>
+      <div class="debate" id="agents" aria-live="polite"></div>
       <button class="copybtn" id="copyMinutes" type="button">Copy the minutes</button>
     </div>
   </section>
@@ -666,24 +685,15 @@ GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
     {name:"Sweet spot",req:"Cut cement, add slag, shift some sand to chips.",
      mix:{cement:260,slag:60,sand:730,chips:1050,water:155},s2:16.1,s28:52.6,cost:87.9,co2:253.0,
      verdict:"approved",stamp:"APPROVED",vt:"Cheaper, greener, and stronger.",vs:"Every axis improves over the baseline.",
-     ag:[["std","Standard","support","28-day <b>52.6</b> \u2014 above the 28 floor; slag lifts late strength."],
-         ["qc","QC","support","2-day <b>16.1</b> clears the 12 demould line."],
-         ["cost","Cost","support","$90.4 \u2192 <b>$87.9</b> per unit."],
-         ["co2","Carbon","support","<b>\u221217%</b> CO\u2082, strength held."]]},
+     ag:[["std","Standard","for","28-day comes in at <b>52.6</b> \u2014 above the baseline, above the floor. w/c <b>0.596</b> keeps the packing sound. I\u2019m satisfied."],["qc","QC","for","<b>16.1</b> at two days against a 12.0 demould line \u2014 real margin. No objection from me."],["cost","Cost","for","<b>$87.9</b> a unit \u2014 that\u2019s $2.50 saved without touching quality. Take it."],["co2","Carbon","for","<b>\u221217% CO\u2082</b> with strength held. This is the cleanest win on the table."]]},
     {name:"20% cement \u2192 slag",req:"Replace ~20% of the cement with slag; swap some sand for chips.",
      mix:{cement:256,slag:64,sand:680,chips:1100,water:160},s2:12.7,s28:46.3,cost:88.2,co2:249.5,
      verdict:"conditions",stamp:"APPROVED / CONDITIONS",vt:"Approved \u2014 with a condition.",vs:"Run a 1-week pilot; 2-day sits close to the line.",
-     ag:[["std","Standard","support","28-day <b>46.3</b> \u2014 solid margin over floor."],
-         ["qc","QC","skeptic","2-day <b>12.7</b> barely clears 12 \u2014 thin buffer."],
-         ["cost","Cost","support","$90.4 \u2192 <b>$88.2</b> per unit."],
-         ["co2","Carbon","support","<b>\u221218%</b> CO\u2082."]]},
+     ag:[["std","Standard","for","<b>46.3</b> at 28 days \u2014 a solid margin over the 28 floor. Structurally I\u2019m fine."],["cost","Cost","for","<b>$88.2</b> \u2014 modest saving, but it compounds at volume."],["co2","Carbon","for","<b>\u221218% CO\u2082</b>. I\u2019ll take every batch of this."],["qc","QC","concern","Hold on \u2014 <b>12.7</b> against a 12.0 line is a thin buffer. One wet sand day and we\u2019re under it. I want a <b>1-week pilot</b> before full production."]]},
     {name:"Aggressive \u00b7 45% slag",req:"Push it \u2014 45% slag, more water to keep it workable.",
      mix:{cement:180,slag:150,sand:730,chips:1050,water:175},s2:8.0,s28:36.0,cost:84.8,co2:182.8,
      verdict:"rejected",stamp:"REJECTED",vt:"Cheapest and greenest on the board \u2014 rejected.",vs:"2-day strength fails the demould spec; units would stick.",
-     ag:[["std","Standard","skeptic","w/c climbs to <b>0.97</b> \u2014 durability risk."],
-         ["qc","QC","skeptic","2-day <b>8.0</b> fails the 12 demould spec."],
-         ["cost","Cost","support","$90.4 \u2192 <b>$84.8</b> \u2014 biggest saving."],
-         ["co2","Carbon","support","<b>\u221240%</b> CO\u2082 \u2014 deepest cut."]]}
+     ag:[["std","Standard","concern","28-day lands at <b>36.0</b> \u2014 over the floor, but w/c climbs to <b>0.97</b>. That much water worries me for durability."],["cost","Cost","for","From my side this is the best mix on the board \u2014 <b>$84.8</b> a unit, $5.60 saved. I want this to work."],["co2","Carbon","for","Deepest cut we\u2019ve ever modeled: <b>\u221240% CO\u2082</b>. If it passes spec, we take it."],["qc","QC","against","It doesn\u2019t pass. Two-day is <b>8.0</b> against a <b>12.0</b> demould spec \u2014 these units stick and chip at the press. <b>I cannot sign off.</b>"]]}
   ];
   // per-material comparison: baseline ghost bar vs proposed colored bar + delta badge.
   // cement/slag/sand/chips are the four levers; water is held at the plant's target moisture.
@@ -726,7 +736,19 @@ GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
       tile("Cost / unit","$"+sCost.toFixed(1),(dC<0?"\u2212$":"+$")+Math.abs(dC).toFixed(1),dC<0)+
       tile("CO\u2082 / batch",s.co2.toFixed(0)+" kg",(dO<0?"\u2212":"+")+Math.abs(dO).toFixed(0)+" kg",dO<0)+
       tile("28-day",s.s28.toFixed(1)+" MPa",(dS>=0?"+":"\u2212")+Math.abs(dS).toFixed(1),dS>=0);
-    document.getElementById("agents").innerHTML=s.ag.map(function(a){return '<div class="agent '+a[2]+'"><div class="ic"><svg viewBox="0 0 16 16" aria-hidden="true">'+IC[a[0]]+'</svg></div><div><div class="r">'+a[1]+'</div><div class="s">'+a[3]+'</div></div></div>';}).join('');
+    (function(){
+      var box=document.getElementById("agents");
+      if(window.__debateTimers){window.__debateTimers.forEach(clearTimeout);}
+      window.__debateTimers=[];
+      var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+      box.innerHTML=s.ag.map(function(a){return '<div class="msg '+a[2]+'"><div class="ic"><svg viewBox="0 0 16 16" aria-hidden="true">'+IC[a[0]]+'</svg></div><div><div class="who">'+a[1]+' <span class="stance '+a[2]+'">'+(a[2]==="for"?"in favour":a[2]==="against"?"veto":"concern")+'</span></div><div class="say">'+a[3]+'</div></div></div>';}).join('')
+        +'<div class="tally">'+({0:'Vote: <b>4 for, 0 against</b> \u2014 unanimous.',1:'Vote: <b>3 for, 1 condition</b> \u2014 QC attaches a pilot run.',2:'Vote: <b>2 for, 1 concern, 1 veto</b> \u2014 QC holds the demould line.'}[i]||'')+'</div>';
+      var els=box.querySelectorAll(".msg,.tally");
+      els.forEach(function(el,k){
+        if(reduce){el.classList.add("show");return;}
+        window.__debateTimers.push(setTimeout(function(){el.classList.add("show");},350+k*650));
+      });
+    })();
     var v=document.getElementById("verdict");v.className="verdict "+s.verdict;
     v.innerHTML='<div class="stamp">'+s.stamp+'</div><div class="vt">'+s.vt+'<small>'+s.vs+'</small></div>';
     stagger(["req","verdict","comp","schart","tiles","agents"]);
