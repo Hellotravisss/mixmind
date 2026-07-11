@@ -32,6 +32,15 @@ You can also ask in plain English — *"replace about 20% of the cement with sla
 
 ---
 
+## How MixMind uses Gemma 4
+
+Gemma 4 12B is the brain of the whole system — chosen deliberately, not by default:
+
+- **It fits the plant.** At 12B (bf16 ≈ 24 GB), Gemma 4 runs comfortably on a single **48 GB AMD Radeon workstation card** — the ~$4k box a small plant can actually buy. Bigger frontier models don't fit the premise; smaller ones couldn't hold the committee's reasoning.
+- **Fine-tuned, measured.** We LoRA-fine-tuned it on a plant instruction set (**MI300X, loss 3.03 → 0.001, 287 MB adapter**) to bake in the floor behaviors: answer from the plant's notes with a citation, refuse when the notes don't cover it, parse plain-English mix requests into exact kg/m³. A **Fireworks LLM-judge (blind A/B, independent model family) preferred the fine-tuned answers 2/3**.
+- **One model, four jobs.** The same fine-tuned Gemma 4 serves the cited Floor Copilot, writes the Mix Committee's debate, parses operator requests, and explains verdicts — grounded by retrieval and a real strength model, so it argues from computed numbers instead of inventing them.
+- **Swappable knowledge, portable brain.** Plant facts live in retrieval, not weights — point the same 287 MB adapter + knowledge base pattern at the next plant and it serves that plant. Open weights make on-prem commercial deployment possible at all.
+
 ## Why it runs on AMD
 
 The whole thesis is **data sovereignty**: a plant will not send its recipes to a third-party API. So the model must be **self-hosted**.
