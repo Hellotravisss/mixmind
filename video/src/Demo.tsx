@@ -8,7 +8,7 @@ import { C, MONO, SANS } from "./theme";
 /* ---------- scene durations (30 fps) ---------- */
 const D = {
   hook: 330, problem: 480, solution: 450, copilot: 760,
-  committee: 990, optimizer: 360, amd: 690, business: 360, close: 390,
+  committee: 990, optimizer: 360, amd: 690, live: 540, business: 360, close: 390,
 };
 export const TOTAL_FRAMES = Object.values(D).reduce((a, b) => a + b, 0);
 
@@ -359,6 +359,31 @@ const Amd: React.FC = () => {
   );
 };
 
+const Live: React.FC = () => {
+  const f = useCurrentFrame();
+  const fade = interpolate(f, [0, 15], [0, 1], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ background: "#0B0C10", fontFamily: SANS, color: C.ink }}>
+      <Audio src={staticFile("vo/live.mp3")} />
+      <div style={{ position: "absolute", top: 52, left: 110, right: 110, display: "flex", justifyContent: "space-between", alignItems: "baseline", opacity: fade }}>
+        <span style={{ fontFamily: MONO, fontSize: 26, letterSpacing: "0.16em", textTransform: "uppercase", color: C.amber }}>
+          Not slideware — recorded live on the MI300X
+        </span>
+        <span style={{ fontFamily: MONO, fontSize: 22, color: C.faint }}>unedited terminal · 1.4× speed</span>
+      </div>
+      <div style={{
+        position: "absolute", top: 130, left: 110, right: 110, bottom: 110,
+        border: `1px solid ${C.line}`, borderRadius: 14, overflow: "hidden", opacity: fade,
+        boxShadow: "0 30px 80px rgba(0,0,0,.55)",
+      }}>
+        <OffthreadVideo muted src={staticFile("clips/live.mp4")}
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top left" }} />
+      </div>
+      <Water />
+    </AbsoluteFill>
+  );
+};
+
 const Business: React.FC = () => (
   <Fill>
       <Audio src={staticFile("vo/business.mp3")} />
@@ -418,6 +443,7 @@ export const Demo: React.FC = () => (
       <Series.Sequence durationInFrames={D.committee}><Committee /></Series.Sequence>
       <Series.Sequence durationInFrames={D.optimizer}><Optimizer /></Series.Sequence>
       <Series.Sequence durationInFrames={D.amd}><Amd /></Series.Sequence>
+      <Series.Sequence durationInFrames={D.live}><Live /></Series.Sequence>
       <Series.Sequence durationInFrames={D.business}><Business /></Series.Sequence>
       <Series.Sequence durationInFrames={D.close}><Close /></Series.Sequence>
     </Series>
