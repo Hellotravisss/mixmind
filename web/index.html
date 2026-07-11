@@ -309,9 +309,9 @@
     border-radius:100px;padding:7px 12px;background:color-mix(in srgb,var(--panel) 65%,transparent);white-space:nowrap}
   .hchip:first-child{color:var(--amber);border-color:rgba(233,161,60,.5)}
   /* committee deliberation feed */
-  .debate{display:flex;flex-direction:column;gap:10px;margin-top:18px}
-  .msg{display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);
-    border-radius:10px;padding:14px 16px;opacity:0;transform:translateY(14px)}
+  .debate{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .msg{display:flex;gap:12px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--line);
+    border-radius:10px;padding:11px 14px;opacity:0;transform:translateY(14px)}
   .msg.show{opacity:1;transform:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.3,1)}
   .msg.for{border-left-color:var(--good)} .msg.against{border-left-color:var(--bad)} .msg.concern{border-left-color:var(--warn)}
   .msg .ic{width:30px;height:30px;flex:0 0 auto;border-radius:7px;background:var(--panel-2);display:grid;place-items:center;color:var(--ink-dim);margin-top:2px}
@@ -417,6 +417,7 @@
       <div class="segs" id="scn" role="group" aria-label="Proposed change" style="margin-top:20px"></div>
       <div class="qline" id="req" style="margin-top:20px"></div>
       <div class="verdict" id="verdict" style="margin-top:18px;margin-bottom:6px"></div>
+      <div class="debate" id="agents" aria-live="polite" style="margin-bottom:8px"></div>
       <div class="figs">
         <div class="card"><div class="figbody">
           <span class="lab">Mix composition &#183; kg/m&#179;</span>
@@ -439,7 +440,6 @@
         <div id="ageChart" style="margin-top:6px"></div>
       </div></div>
       <div class="tiles" id="tiles"></div>
-      <div class="debate" id="agents" aria-live="polite"></div>
       <button class="copybtn" id="copyMinutes" type="button">Copy the minutes</button>
     </div>
   </section>
@@ -746,12 +746,12 @@ GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
       var els=box.querySelectorAll(".msg,.tally");
       els.forEach(function(el,k){
         if(reduce){el.classList.add("show");return;}
-        window.__debateTimers.push(setTimeout(function(){el.classList.add("show");},350+k*650));
+        window.__debateTimers.push(setTimeout(function(){el.classList.add("show");},250+k*450));
       });
     })();
     var v=document.getElementById("verdict");v.className="verdict "+s.verdict;
     v.innerHTML='<div class="stamp">'+s.stamp+'</div><div class="vt">'+s.vt+'<small>'+s.vs+'</small></div>';
-    stagger(["req","verdict","comp","schart","tiles","agents"]);
+    stagger(["req","verdict","agents","comp","schart","tiles"]);
     if(window.__ageReady)renderAge(i);
   }
   renderScn(0);
