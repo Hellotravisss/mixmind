@@ -312,7 +312,7 @@
     <nav class="nav" aria-label="Sections">
       <a href="#copilot"><i>01</i>Ask the floor</a><a href="#committee"><i>02</i>The committee</a><a href="#optimizer"><i>03</i>Drive the mix</a>
     </nav>
-    <div class="hwtag"><span class="dot"></span><span>AMD Radeon &#183; on-prem</span></div>
+    <div class="hwtag"><span class="dot"></span><span>AMD MI300X + Radeon &#183; on-prem</span></div>
   </div>
 
   <!-- HERO -->
@@ -496,18 +496,18 @@
       </div>
       <div class="figs" style="grid-template-columns:1fr 1fr;margin-top:22px">
         <div class="card"><div class="figbody">
-          <span class="lab">Radeon PRO W7900 &#183; 48 GB &#183; in the plant</span>
-          <pre class="evlog">$ rocm-smi --showproductname
-GPU[0]  Card Vendor: Advanced Micro Devices, Inc. [AMD/ATI]
-GPU[0]  GFX Version: gfx1100
-GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
-        </div></div>
-        <div class="card"><div class="figbody">
           <span class="lab">Instinct MI300X &#183; 192 GB &#183; fine-tune, $2</span>
           <pre class="evlog">GPU[0]  Card Series: AMD Instinct MI300X VF (gfx942)
 trainable params: 65,568,768 (0.55% of 12B)
 epoch 1 loss 3.029 &#8594; epoch 3 loss 0.001
 saved LoRA adapter &#8594; mixmind-gemma4-lora (287 MB)</pre>
+        </div></div>
+        <div class="card"><div class="figbody">
+          <span class="lab">Radeon PRO W7900 &#183; 48 GB &#183; in the plant</span>
+          <pre class="evlog">$ rocm-smi --showproductname
+GPU[0]  Card Vendor: Advanced Micro Devices, Inc. [AMD/ATI]
+GPU[0]  GFX Version: gfx1100
+GPU[0]  VRAM Total:  51,522,830,336 B  (48 GB)</pre>
         </div></div>
       </div>
     </div>
@@ -520,7 +520,7 @@ saved LoRA adapter &#8594; mixmind-gemma4-lora (287 MB)</pre>
   </section>
 
   <footer class="wrap"><div class="foot">
-    <span><b>Gemma 4</b> on AMD Radeon (ROCm)</span>
+    <span><b>Gemma 4</b> &#183; fine-tuned on AMD Instinct MI300X &#183; served on Radeon (ROCm)</span>
     <span><b>UCI Concrete</b> Yeh 1998 &#183; R&#178;=0.91</span>
     <span>We predict directions &#8212; we don't certify mixes.</span>
     <span>Built by a plant operator</span>
