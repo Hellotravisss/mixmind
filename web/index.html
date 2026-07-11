@@ -382,6 +382,7 @@
       <div class="tryhint"><b>TRY IT</b> Pick a proposal &#8212; watch the verdict change</div>
       <div class="segs" id="scn" role="group" aria-label="Proposed change" style="margin-top:20px"></div>
       <div class="qline" id="req" style="margin-top:20px"></div>
+      <div class="verdict" id="verdict" style="margin-top:18px;margin-bottom:6px"></div>
       <div class="figs">
         <div class="card"><div class="figbody">
           <span class="lab">Mix composition &#183; kg/m&#179;</span>
@@ -401,7 +402,6 @@
       </div>
       <div class="tiles" id="tiles"></div>
       <div class="agents" id="agents"></div>
-      <div class="verdict" id="verdict"></div>
     </div>
   </section>
 
@@ -682,7 +682,7 @@
     document.getElementById("agents").innerHTML=s.ag.map(function(a){return '<div class="agent '+a[2]+'"><div class="ic"><svg viewBox="0 0 16 16" aria-hidden="true">'+IC[a[0]]+'</svg></div><div><div class="r">'+a[1]+'</div><div class="s">'+a[3]+'</div></div></div>';}).join('');
     var v=document.getElementById("verdict");v.className="verdict "+s.verdict;
     v.innerHTML='<div class="stamp">'+s.stamp+'</div><div class="vt">'+s.vt+'<small>'+s.vs+'</small></div>';
-    stagger(["req","comp","schart","tiles","agents","verdict"]);
+    stagger(["req","verdict","comp","schart","tiles","agents"]);
   }
   renderScn(0);
 
