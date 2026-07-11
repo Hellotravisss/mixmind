@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  AbsoluteFill, Audio, Img, Series, interpolate, spring,
+  AbsoluteFill, Audio, Img, Loop, OffthreadVideo, Series, interpolate, spring,
   staticFile, useCurrentFrame, useVideoConfig,
 } from "remotion";
 import { C, MONO, SANS } from "./theme";
@@ -77,6 +77,22 @@ const Stamp: React.FC<{ delay: number; color: string; children: React.ReactNode 
   );
 };
 
+/* film background: looped Kling clip + the site's scrim, behind the copy */
+const Film: React.FC<{ src: string }> = ({ src }) => {
+  const f = useCurrentFrame();
+  const fadeIn = interpolate(f, [0, 18], [0, 1], { extrapolateRight: "clamp" });
+  return (
+    <AbsoluteFill style={{ opacity: fadeIn }}>
+      <Loop durationInFrames={228}>
+        <OffthreadVideo muted src={staticFile(src)}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </Loop>
+      <AbsoluteFill style={{ background: "linear-gradient(90deg, rgba(14,15,19,.94) 0%, rgba(14,15,19,.72) 52%, rgba(14,15,19,.42) 100%)" }} />
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(14,15,19,.35) 0%, rgba(14,15,19,.15) 45%, rgba(14,15,19,.78) 100%)" }} />
+    </AbsoluteFill>
+  );
+};
+
 /* =============== SCENES =============== */
 
 const Hook: React.FC = () => {
@@ -85,7 +101,8 @@ const Hook: React.FC = () => {
   return (
     <Fill>
       <Audio src={staticFile("vo/hook.mp3")} />
-      <div style={{ opacity: dim, height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <Film src="clips/1.mp4" />
+      <div style={{ position: "relative", opacity: dim, height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <Kick delay={6}>AMD Developer Hackathon · ACT II · Track 3 Unicorn</Kick>
         <FadeUp delay={20} style={{ fontSize: 118, fontWeight: 800, lineHeight: 1.02, letterSpacing: "-0.03em", maxWidth: 1500 }}>
           The AI committee <span style={{ color: C.amber }}>rejected</span> the cheapest, greenest mix.
@@ -105,7 +122,8 @@ const Hook: React.FC = () => {
 const Problem: React.FC = () => (
   <Fill>
       <Audio src={staticFile("vo/problem.mp3")} />
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <Film src="clips/2.mp4" />
+    <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <Kick delay={4}>The problem</Kick>
       <FadeUp delay={16} style={{ fontSize: 150, fontWeight: 800, letterSpacing: "-0.03em" }}>
         Concrete <span style={{ color: C.amber }}>≈ 8%</span> of global CO₂.
@@ -344,7 +362,8 @@ const Amd: React.FC = () => {
 const Business: React.FC = () => (
   <Fill>
       <Audio src={staticFile("vo/business.mp3")} />
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <Film src="clips/4.mp4" />
+    <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <Kick delay={4}>The business — bottom-up</Kick>
       <FadeUp delay={16} style={{ fontSize: 68, fontWeight: 800, maxWidth: 1500, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
         A mid-size plant spends <span style={{ color: C.amber }}>~$1M+ a year</span> on cement.
@@ -362,7 +381,8 @@ const Business: React.FC = () => (
 const Close: React.FC = () => (
   <Fill>
       <Audio src={staticFile("vo/close.mp3")} />
-    <div style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+    <Film src="clips/5.mp4" />
+    <div style={{ position: "relative", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
       <div style={{ display: "flex", gap: 2, border: `1px solid ${C.line}`, borderRadius: 10, overflow: "hidden", marginBottom: 70 }}>
         {[["−17%", "CO₂, strength held", C.good], ["R² 0.910", "1,030 lab tests", C.amber],
           ["100%", "grounded citations", C.good], ["0 bytes", "sent off-site", C.steel]].map(([n, l, col], i) => (
